@@ -43,7 +43,7 @@ int main() {
                 cout << "Invalid input. Please enter only one of the options above." << endl;
             }
         } else {
-            cout << "Invalid input. Please enter a single digit only" << endl;
+            cout << "Invalid input. Please enter a single digit only." << endl;
         }
         
         switch(cleaned_choice){
@@ -58,7 +58,7 @@ int main() {
                     if (configData.is_open()){
 
                         configData.close();
-                        //implement function to take all the strings out of the file here
+                        //implement function to take all the specific string out of the file here
 
                         break; 
                     }

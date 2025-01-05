@@ -17,6 +17,7 @@ int main() {
     int cleaned_choice = 0;    
 
     do {
+        cout << endl;
         cout << "Student ID   " << ": 8963822" << endl;
 	    cout << "Student Name " << ": Ooi Jun Kang" << endl;
         cout << setfill('*') << setw(29) << "*" << endl;
@@ -42,62 +43,91 @@ int main() {
 
             if (digit >= 1 && digit <= 8) {
                 cleaned_choice = digit;
-            } else {
-                cout << "Invalid input. Please enter only one of the options above." << endl;
+            } else {  
+                cout << "Invalid input. Please enter only one of the options above.";
             }
         } else {
             cout << "Invalid input. Please enter a single digit only." << endl;
+            continue;
         }
         
         switch(cleaned_choice){
-            //Option 1
+            //Option 1: Read config file by user
             case 1:{
                 cout << "[Read in and process a configuration file]" << endl;
                 cout << "Please enter a config filename : ";
                 getline(cin, config);
                 cout << endl;
 
-                ifstream configData(config);
-                if (configData.is_open()){
-                    
-                    while (configData >> gridXRange >> gridYRange >> cityFile >> cloudFile >> pressureFile)
-                    {
-
-                    }
-                    configData.close();
-
-                    //split number from delimiters
-                    vector<string> tokenStringVector = tokenizeString(gridXRange, "=");
-                    vector<string> xValues = tokenizeString(tokenStringVector[1], "-");
-                    cout << "GridX after 0-: " << xValues[1] << endl;
-
-                    break; 
-                }
-                //check if user enter empty string
-                else if (config.empty()){
+                //Check for empty input
+                if (config.empty()) {
                     cout << "Empty config file input." << endl;
                     cout << "Press <enter> to go back to main menu." << endl;
-                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
+                }
 
-                } else if (!configData.is_open()){
-                    cerr << "Error: Could not open the file " << endl;
-                    cout << "Press <enter> to go back to main menu." << endl;
-                    cin.ignore(numeric_limits<int>::max(),'\n');
-                    break;
+                string line;
+                int lineCount = 0;
+                ifstream configData(config);
+                if (configData.is_open()) {
 
+                    while(getline(configData, line)) {
+                        //Trim leading/trailing whitespaces from the line
+                        line.erase(0, line.find_first_not_of("\t"));
+                        line.erase(line.find_last_not_of(" \t") + 1);
+
+                        //Skip empty lines or lines starting with //
+                        if(line.empty() || line.substr(0,2) == "//"){
+                            continue;
+                        }
+
+                        //Store lines in specific variables
+                        if (lineCount == 0) {
+                            gridXRange = line;
+                        } else if (lineCount == 1) {
+                            gridYRange = line;
+                        } else if (lineCount == 2) {
+                            cityFile = line;
+                        } else if (lineCount == 3) {
+                            cloudFile = line;
+                        } else if (lineCount == 4) {
+                            pressureFile = line;
+                        }
+
+                        lineCount++;
+                    }
+                    
+                    //Split the strings up according to the delimiter
+                    vector<string> tokenStringVector = tokenizeString(gridXRange, "=");
+                    vector<string> xValues = tokenizeString(tokenStringVector[1], "-");
+                    cout << "GridX before -: " << xValues[0] << endl;
+                    cout << "GridX after -: " << xValues[1] << endl;
+
+
+                    configData.close();
+                    break; 
                 }
                 //check if user inputted something else
                 else {
-                    cout << "Invalid config file entered." << endl;;
+                    cerr << "Error: Could not open the file: " << config << endl;;
                     cout << "Press <enter> to go back to main menu." << endl;
                     cin.ignore(numeric_limits<int>::max(),'\n');
                     break;
                 }
-            }  
+            }
+            //Option 2: Display city map  
             case 2:
-                cout << "You have selected option 2" << endl;
-                break;
+                if (config.empty()){
+                    cout << "You have not entered a valid config file with a city text file" << endl;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    break;
+                } else {
+                    cout << "You have selected option 2" << endl;
+                    break;
+                }
+                
             case 3:
                 cout << "You have selected option 3" << endl;
                 break;

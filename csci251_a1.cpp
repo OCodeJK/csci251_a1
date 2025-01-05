@@ -1,3 +1,4 @@
+#include "tokenizer.h"
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -7,11 +8,13 @@
 
 using namespace std;
 
+//for storing the different files in the config.txt
+string gridXRange, gridYRange, cityFile, cloudFile, pressureFile;
 int main() {
     
     string config;
     string choice;
-    int cleaned_choice;
+    int cleaned_choice = 0;    
 
     do {
         cout << "Student ID   " << ": 8963822" << endl;
@@ -55,26 +58,42 @@ int main() {
                 cout << endl;
 
                 ifstream configData(config);
-                    if (configData.is_open()){
+                if (configData.is_open()){
+                    
+                    while (configData >> gridXRange >> gridYRange >> cityFile >> cloudFile >> pressureFile)
+                    {
 
-                        configData.close();
-                        //implement function to take all the specific string out of the file here
+                    }
+                    configData.close();
 
-                        break; 
-                    }
-                    //check if user enter empty string
-                    else if (config.empty()){
-                        cout << "Empty config file input." << endl;
-                        cout << "Press <enter> to go back to main menu." << endl;
-						cin.ignore(numeric_limits<int>::max(),'\n');
-                        break;
-                    }
-                    else {
-                        cout << "Invalid config file entered." << endl;;
-						cout << "Press <enter> to go back to main menu." << endl;
-						cin.ignore(numeric_limits<int>::max(),'\n');
-                        break;
-                    }
+                    //split number from delimiters
+                    vector<string> tokenStringVector = tokenizeString(gridXRange, "=");
+                    vector<string> xValues = tokenizeString(tokenStringVector[1], "-");
+                    cout << "GridX after 0-: " << xValues[1] << endl;
+
+                    break; 
+                }
+                //check if user enter empty string
+                else if (config.empty()){
+                    cout << "Empty config file input." << endl;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    break;
+
+                } else if (!configData.is_open()){
+                    cerr << "Error: Could not open the file " << endl;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    break;
+
+                }
+                //check if user inputted something else
+                else {
+                    cout << "Invalid config file entered." << endl;;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    break;
+                }
             }  
             case 2:
                 cout << "You have selected option 2" << endl;

@@ -44,7 +44,8 @@ int main() {
             if (digit >= 1 && digit <= 8) {
                 cleaned_choice = digit;
             } else {  
-                cout << "Invalid input. Please enter only one of the options above.";
+                cout << "Invalid input. Please enter only one of the options above." << endl;
+                continue;
             }
         } else {
             cout << "Invalid input. Please enter a single digit only." << endl;

@@ -88,22 +88,23 @@ int main() {
                         //Skip empty lines or lines starting with //
                         if(line.empty() || line.substr(0,2) == "//"){
                             continue;
-                        }
+                        } else if(line.find(".txt") != string::npos || line.find("=") != string::npos) {
 
-                        //Store lines in specific variables
-                        if (lineCount == 0) {
-                            gridXRange = line;
-                        } else if (lineCount == 1) {
-                            gridYRange = line;
-                        } else if (lineCount == 2) {
-                            cityFile = line;
-                        } else if (lineCount == 3) {
-                            cloudFile = line;
-                        } else if (lineCount == 4) {
-                            pressureFile = line;
+                            //Store lines in specific variables
+                            if (lineCount == 0) {
+                                gridXRange = line;
+                            } else if (lineCount == 1) {
+                                gridYRange = line;
+                            } else if (lineCount == 2) {
+                                cityFile = line;
+                            } else if (lineCount == 3) {
+                                cloudFile = line;
+                            } else if (lineCount == 4) {
+                                pressureFile = line;
+                            }
+                            lineCount++;
+                            
                         }
-
-                        lineCount++;
                     }
                     
                     //Split the strings up according to the delimiter
@@ -114,6 +115,8 @@ int main() {
                     tokenStringVector.clear();
                     tokenStringVector = tokenizeString(gridYRange, "=");
                     vector<string> yValues = tokenizeString(tokenStringVector[1], "-");
+                    cout << "GridY before -: " << yValues[0] << endl; //n1
+                    cout << "GridY before -: " << yValues[1] << endl; //n1
 
 
                     configData.close();

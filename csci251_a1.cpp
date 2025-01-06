@@ -120,6 +120,8 @@ int main() {
 
 
                     configData.close();
+
+                    cout << "city File : " << cityFile << endl;
                     break; 
                 }
                 //check if user inputted something else

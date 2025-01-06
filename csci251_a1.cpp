@@ -14,7 +14,8 @@ int main() {
     
     string config;
     string choice;
-    int cleaned_choice = 0;    
+    int cleaned_choice = 0;
+    string error_message;
 
     do {
         cout << endl;
@@ -32,6 +33,12 @@ int main() {
         cout << "7)"  << "   Show weather forecast summary report" << endl;
         cout << "8)"  << "   Quit" << endl;
         cout << endl;
+        //Display error message below the menu
+        if(!error_message.empty()){
+            cout << error_message << endl;
+            error_message.clear();
+        }
+
         cout << "Please enter your choice : ";
         
         getline(cin, choice);
@@ -44,11 +51,11 @@ int main() {
             if (digit >= 1 && digit <= 8) {
                 cleaned_choice = digit;
             } else {  
-                cout << "Invalid input. Please enter only one of the options above." << endl;
+                error_message = "Invalid input. Please enter only one of the options above.";
                 continue;
             }
         } else {
-            cout << "Invalid input. Please enter a single digit only." << endl;
+            error_message = "Invalid input. Please enter a single digit only.";
             continue;
         }
         
@@ -119,7 +126,7 @@ int main() {
             }
             //Option 2: Display city map  
             case 2:
-                if (config.empty()){
+                if (cityFile.empty()){
                     cout << "You have not entered a valid config file with a city text file" << endl;
                     cout << "Press <enter> to go back to main menu." << endl;
                     cin.ignore(numeric_limits<int>::max(),'\n');

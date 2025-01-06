@@ -77,14 +77,10 @@ int main() {
 
                 string line;
                 int lineCount = 0;
-                ifstream configData(config);
+                ifstream configData(config.c_str());
                 if (configData.is_open()) {
 
                     while(getline(configData, line)) {
-                        //Trim leading/trailing whitespaces from the line
-                        line.erase(0, line.find_first_not_of("\t"));
-                        line.erase(line.find_last_not_of(" \t") + 1);
-
                         //Skip empty lines or lines starting with //
                         if(line.empty() || line.substr(0,2) == "//"){
                             continue;
@@ -122,6 +118,8 @@ int main() {
                     configData.close();
 
                     cout << "city File : " << cityFile << endl;
+                    cout << "cloud File : " << cloudFile << endl;
+                    cout << "pressure File : " << pressureFile << endl;
                     break; 
                 }
                 //check if user inputted something else

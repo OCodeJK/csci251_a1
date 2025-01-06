@@ -108,9 +108,12 @@ int main() {
                     
                     //Split the strings up according to the delimiter
                     vector<string> tokenStringVector = tokenizeString(gridXRange, "=");
-                    vector<string> xValues = tokenizeString(tokenStringVector[1], "-");
-                    cout << "GridX before -: " << xValues[0] << endl;
-                    cout << "GridX after -: " << xValues[1] << endl;
+                    vector<string> xValues = tokenizeString(tokenStringVector[1], "-"); //so the n1 and n2 is stored here
+                    cout << "GridX before -: " << xValues[0] << endl; //n1
+                    cout << "GridX after -: " << xValues[1] << endl; //n2
+                    tokenStringVector.clear();
+                    tokenStringVector = tokenizeString(gridYRange, "=");
+                    vector<string> yValues = tokenizeString(tokenStringVector[1], "-");
 
 
                     configData.close();

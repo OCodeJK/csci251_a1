@@ -46,13 +46,12 @@ void createCityMap(string cityFile,int row,int col)
             }
 			
 		}
-		cout << arrayLength << endl; //14 including the whitespace
 		cityData.close();
 		ifstream cityData(cityFile);
-		// create array to store all the variables I will be extracting from the document
+		// Dynamic array allocation
 		cityArray = new cityStruct[arrayLength];
 		int lineNo = 0;
-		// Go through each line of the document and tokenize and store the variables into the structure array.
+		// Break down each line using tokenizeString.cpp
 		while (getline(cityData,line))
 		{	
 			vector<string> cityDataVector = tokenizeString(line, "-");
@@ -84,7 +83,7 @@ void createCityMap(string cityFile,int row,int col)
 				}
 		}
 		// go through each of the structure array in order to extract the ID and store it in the appropriate location
-		for (int k=0;k<arrayLength;k++)
+		for (int k=0; k < arrayLength; k++)
 		{
 			ostringstream oss;
 			oss << cityArray[k].cityId;
@@ -98,7 +97,7 @@ void createCityMap(string cityFile,int row,int col)
 	
 }
 
-// function to display the map with the city ID in a nicer UI display
+// Display map with city inside it
 void displayCityMap(int row,int col)
 {
 	cout << "  #";

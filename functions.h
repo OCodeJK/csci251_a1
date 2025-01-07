@@ -54,9 +54,9 @@ inline void cleanFile(const string& filename) {
             outputFile << cleanedLine << endl;
         }
         outputFile.close();
-        cout << "File cleaned successfully." << endl;
+        cout << "File " << filename << " cleaned successfully." << endl;
     } else {
-        cerr << "Failed to open the file for writing." << endl;
+        cerr << "Failed to open the" << filename << "file for writing." << endl;
     }
 }
 

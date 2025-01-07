@@ -1,12 +1,15 @@
-#include "tokenizer.h"
+#include "functions.h"
 #include <iostream>
 #include <string>
 #include <iomanip>
 #include <fstream>
-#include <cctype>
 #include <limits>
 
 using namespace std;
+
+
+void createCityMap(string, int, int);
+
 
 //for storing the different files in the config.txt
 string gridXRange, gridYRange, cityFile, cloudFile, pressureFile;
@@ -16,10 +19,11 @@ int main() {
     string choice;
     int cleaned_choice = 0;
     string error_message;
+    int xMax, yMax;
 
     do {
         cout << endl;
-        cout << "Student ID   " << ": 8963822" << endl;
+        cout << "Student ID   " << ": 9071180" << endl;
 	    cout << "Student Name " << ": Ooi Jun Kang" << endl;
         cout << setfill('*') << setw(29) << "*" << endl;
         cout << "Welcome to Weather Information Processing System" << endl;
@@ -40,7 +44,6 @@ int main() {
         }
 
         cout << "Please enter your choice : ";
-        
         getline(cin, choice);
 
         // Check if the input is not empty and is a single character
@@ -71,21 +74,23 @@ int main() {
                 if (config.empty()) {
                     cout << "Empty config file input." << endl;
                     cout << "Press <enter> to go back to main menu." << endl;
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cin.get(); //wait for enter
                     break;
                 }
 
                 string line;
                 int lineCount = 0;
+                cleanFile(config);
                 ifstream configData(config.c_str());
                 if (configData.is_open()) {
 
                     while(getline(configData, line)) {
+
                         //Skip empty lines or lines starting with //
                         if(line.empty() || line.substr(0,2) == "//"){
                             continue;
                         } else if(line.find(".txt") != string::npos || line.find("=") != string::npos) {
-
+                            // cout << line << endl;
                             //Store lines in specific variables
                             if (lineCount == 0) {
                                 gridXRange = line;
@@ -102,31 +107,37 @@ int main() {
                             
                         }
                     }
-                    
+                    configData.close();
                     //Split the strings up according to the delimiter
                     vector<string> tokenStringVector = tokenizeString(gridXRange, "=");
                     vector<string> xValues = tokenizeString(tokenStringVector[1], "-"); //so the n1 and n2 is stored here
-                    cout << "GridX before -: " << xValues[0] << endl; //n1
-                    cout << "GridX after -: " << xValues[1] << endl; //n2
                     tokenStringVector.clear();
                     tokenStringVector = tokenizeString(gridYRange, "=");
                     vector<string> yValues = tokenizeString(tokenStringVector[1], "-");
-                    cout << "GridY before -: " << yValues[0] << endl; //n1
-                    cout << "GridY before -: " << yValues[1] << endl; //n1
+                    tokenStringVector.clear();
+                    //assign the individual value to a variable
+                    //also add + 1 because 0 is included
+                    xMax = stoi(xValues[1]) + 1;
+                    yMax = stoi(yValues[1]) + 1;
+                    createCityMap(cityFile,xMax,yMax);
+                    cout << "Reading in " << gridXRange << "...done!" << endl;
+                    cout << "Reading in " << gridYRange << "...done!" << endl;
+                    cout << endl << "Storing data from input file:" << endl;
+                    cout << cityFile << "...done!" << endl;
+                    cout << cloudFile << "...done!" << endl;
+                    cout << pressureFile << "...done!" << endl;
+                    cout << endl << "All records successfully stored. Going back to main menu...<enter>" << endl;
+                    
+                    cin.ignore(numeric_limits<int>::max(),'\n');
 
-
-                    configData.close();
-
-                    cout << "city File : " << cityFile << endl;
-                    cout << "cloud File : " << cloudFile << endl;
-                    cout << "pressure File : " << pressureFile << endl;
-                    break; 
+                    break;
+                   
                 }
-                //check if user inputted something else
                 else {
+                    //check if user inputted something else
                     cerr << "Error: Could not open the file: " << config << endl;;
                     cout << "Press <enter> to go back to main menu." << endl;
-                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    cin.get();
                     break;
                 }
             }
@@ -135,11 +146,14 @@ int main() {
                 if (cityFile.empty()){
                     cout << "You have not entered a valid config file with a city text file" << endl;
                     cout << "Press <enter> to go back to main menu." << endl;
-                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    cin.get();
                     break;
                 } else {
-                    cout << "You have selected option 2" << endl;
-                    break;
+                    displayCityMap(xMax,yMax);
+                    cout << endl;
+					cout << "Press <enter> to go back to main menu..." << endl;
+					cin.ignore(numeric_limits<int>::max(),'\n');
+					break;
                 }
                 
             case 3:
@@ -161,9 +175,13 @@ int main() {
         cout << endl;
 
     }
-    while (cleaned_choice != 8);
-
+    while (cleaned_choice != 8); //Quits
     
 
-    return 0;
+    //deallocate memory
+    deleteCityMemory(xMax,yMax);
+    cout << "Exiting..." << endl;
+    
+
+    return (0);
 }

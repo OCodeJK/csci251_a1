@@ -120,15 +120,16 @@ int main() {
                     xMax = stoi(xValues[1]) + 1;
                     yMax = stoi(yValues[1]) + 1;
                     createCityMap(cityFile,xMax,yMax);
-                    cout << "Reading in " << gridXRange << "...done!" << endl;
-                    cout << "Reading in " << gridYRange << "...done!" << endl;
+                    cout << endl;
+                    cout << "Getting X axis " << gridXRange << "...completed!" << endl;
+                    cout << "Getting Y axis " << gridYRange << "...completed!" << endl;
                     cout << endl << "Storing data from input file:" << endl;
-                    cout << cityFile << "...done!" << endl;
-                    cout << cloudFile << "...done!" << endl;
-                    cout << pressureFile << "...done!" << endl;
+                    cout << cityFile << "...completed!" << endl;
+                    cout << cloudFile << "...completed!" << endl;
+                    cout << pressureFile << "...completed!" << endl;
                     cout << endl << "All records successfully stored. Going back to main menu...<enter>" << endl;
                     
-                    cin.ignore(numeric_limits<int>::max(),'\n');
+                    cin.get();
 
                     break;
                    

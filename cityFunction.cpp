@@ -100,27 +100,38 @@ void createCityMap(string cityFile,int row,int col)
 // Display map with city inside it
 void displayCityMap(int row,int col)
 {
+	//draws the first row (from the top)
 	cout << "  #";
 	for (int i=0; i<col; i++)
 	{
 		cout << " " << "#";
 	}
 	cout << " #" << endl;
+
+
 	for (int i=0; i<row; i++)
 	{	
+		//this is for the column number
 		cout << (row - i - 1) << " #" ;	
-		for (int j=0;j<col;j++)
+
+		//this creates the column and populate the grid with city
+		for (int j=0; j<col; j++)
 		{	
 			cout << " " << arrayMap[i][j];
 		}
 		cout << " #" << endl;
 	}
+
+	//draws the last row (at the bottom)
 	cout << "  #";
 	for (int i=0; i<col; i++)
 	{
 		cout << " " << "#";
 	}
 	cout << " #" << endl << "   ";
+
+
+	//this is for row number
 	for (int i=0; i<col; i++)
 	{
 		cout << " " << i;
@@ -129,7 +140,7 @@ void displayCityMap(int row,int col)
 	cout << endl;
 }
 
-// delete the array after user has finished using the program to save space
+// Delete memory allocation for city grid map when they quit program
 void deleteCityMemory(int row,int col)
 {
 	if (col<=0)

@@ -19,7 +19,7 @@ void createCloudMap(string cloudFile,int row,int col)
 
 	// variable to initalize the array dynamically later
 	int totalLength = 0;
-	int lineNo = 0;
+	int lineNumber = 0;
 
 	// creating the 2D array to display the cloud level for user
 	cloudMap = new string * [row];
@@ -45,14 +45,14 @@ void createCloudMap(string cloudFile,int row,int col)
 			vector<string> cloudDataVector = tokenizeString(line, "-");
 			vector<string> cloudCoordsVector = tokenizeString(cloudDataVector[0], ",");
 			cloudCoordsVector[0].erase(cloudCoordsVector[0].begin());
-			cloudArray[lineNo].x = stoi(cloudCoordsVector[0]);
-			cloudArray[lineNo].y = stoi(cloudCoordsVector[1]);
-			cloudArray[lineNo].cloudLvl = stoi(cloudDataVector[1]);
+			cloudArray[lineNumber].x = stoi(cloudCoordsVector[0]);
+			cloudArray[lineNumber].y = stoi(cloudCoordsVector[1]);
+			cloudArray[lineNumber].cloudLvl = stoi(cloudDataVector[1]);
 			// insert the cloud level into the map for the specific coordinate
 			ostringstream oss;
-			oss << cloudArray[lineNo].cloudLvl;
-			cloudMap[col-1-cloudArray[lineNo].y][cloudArray[lineNo].x] = oss.str();
-			lineNo++;
+			oss << cloudArray[lineNumber].cloudLvl;
+			cloudMap[col-1-cloudArray[lineNumber].y][cloudArray[lineNumber].x] = oss.str();
+			lineNumber++;
 		}
         
 	}

@@ -31,17 +31,17 @@ void createCityMap(string cityFile, int row, int col){
         ifstream cityData(cityFile);
         //create dynamic array to store the actual city coordinates
         cityArray = new cityStruct[totalLength];
-        int lineNo = 0;
+        int lineNumber = 0;
         // Go through each line, tokenize each of them and store in a respective variable
         while(getline(cityData, line)){
             vector<string> cityDataSplit = tokenizeString(line, "-"); //Split according to - so eg. [1, 1], 3, Big_City
 			vector<string> cityCoordsSplit = tokenizeString(cityDataSplit[0], ","); //Split again for the coords eg. ([1), (1])
             cityCoordsSplit[0].erase(cityCoordsSplit[0].begin()); //Get the rid of the [
-            cityArray[lineNo].x = stoi(cityCoordsSplit[0]); //Stores the x coord in cityArray[n].x
-			cityArray[lineNo].y = stoi(cityCoordsSplit[1]); //Stores the y coord in cityArray[n].y
-			cityArray[lineNo].cityId = stoi(cityDataSplit[1]); //Store the city id in cityArray[n].cityId
-			cityArray[lineNo].name = cityDataSplit[2]; //Store the city name in cityArray[n].name
-			lineNo++;
+            cityArray[lineNumber].x = stoi(cityCoordsSplit[0]); //Stores the x coord in cityArray[n].x
+			cityArray[lineNumber].y = stoi(cityCoordsSplit[1]); //Stores the y coord in cityArray[n].y
+			cityArray[lineNumber].cityId = stoi(cityDataSplit[1]); //Store the city id in cityArray[n].cityId
+			cityArray[lineNumber].name = cityDataSplit[2]; //Store the city name in cityArray[n].name
+			lineNumber++;
         }
         cityData.close();
 

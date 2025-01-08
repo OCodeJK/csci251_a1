@@ -1,28 +1,9 @@
 #ifndef cityFunction_cpp
 #define cityFunction_cpp
 #include "functions.h"
+#include "structs.h"
 
 using namespace std;
-
-struct cityStruct {
-    int x, y;
-	int cityId;
-	string name;
-
-    string toString();
-};
-
-string cityStruct::toString()
-{
-	ostringstream oss;
-
-	oss << "X Coords               : " << x << endl;
-	oss << "Y Coords               : " << y << endl;
-	oss << "City ID           : " << cityId << endl;
-	oss << "City Name    : " << name << endl;
-
-	return (oss.str());
-}
 
 
 cityStruct * cityArray;
@@ -31,7 +12,7 @@ string ** arrayMap = nullptr;
 
 void createCityMap(string cityFile,int row,int col)
 {
-	//Clean the file the ifstream it
+	//Clean the file then ifstream it
 	cleanFile(cityFile);
 	ifstream cityData(cityFile.c_str());
 	string line;
@@ -41,6 +22,7 @@ void createCityMap(string cityFile,int row,int col)
 	{	
 		while (getline(cityData,line))
 		{   
+			//count the lines only if they are not empty spaces
 			if (!line.empty()) {
                 arrayLength++;
             }
@@ -48,20 +30,21 @@ void createCityMap(string cityFile,int row,int col)
 		}
 		cityData.close();
 		ifstream cityData(cityFile);
-		// Dynamic array allocation
+		
+		// Dynamic array allocation using arrayLength
 		cityArray = new cityStruct[arrayLength];
-		int lineNo = 0;
+		int lineCount = 0;
 		// Break down each line using tokenizeString.cpp
 		while (getline(cityData,line))
 		{	
-			vector<string> cityDataVector = tokenizeString(line, "-");
-			vector<string> cityCoordsVector = tokenizeString(cityDataVector[0], ",");
-			cityCoordsVector[0].erase(cityCoordsVector[0].begin());
-			cityArray[lineNo].x = stoi(cityCoordsVector[0]);
-			cityArray[lineNo].y = stoi(cityCoordsVector[1]);
-			cityArray[lineNo].cityId = stoi(cityDataVector[1]);
-			cityArray[lineNo].name = cityDataVector[2];
-			lineNo++;
+			vector<string> cityDataSplit = tokenizeString(line, "-"); //split [x,y] cityID cityName
+			vector<string> cityCoordsSplit = tokenizeString(cityDataSplit[0], ","); //split [x,y] into [x    y]
+			cityDataSplit[0].erase(cityDataSplit[0].begin()); //erase the [
+			cityArray[lineCount].x = stoi(cityDataSplit[0]); //store x in cityArray[n].x
+			cityArray[lineCount].y = stoi(cityDataSplit[1]); //store y in cityArray[n].y
+			cityArray[lineCount].cityId = stoi(cityDataSplit[1]); //store cityId in cityArray[n].cityId
+			cityArray[lineCount].name = cityDataSplit[2]; //store city name in cityArray[n].name
+			lineCount++;
 
 		}
 		cityData.close();
@@ -82,7 +65,8 @@ void createCityMap(string cityFile,int row,int col)
 					arrayMap[i][j] = oss.str();
 				}
 		}
-		// go through each of the structure array in order to extract the ID and store it in the appropriate location
+
+		//extract city ID to store in the arrayMap
 		for (int k=0; k < arrayLength; k++)
 		{
 			ostringstream oss;
@@ -92,7 +76,7 @@ void createCityMap(string cityFile,int row,int col)
 	}
 	else 
 	{
-		cout << "Unable to open file" << endl;
+		cerr << "Error could not open file : " << cityFile << endl;
 	}
 	
 }

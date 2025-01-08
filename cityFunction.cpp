@@ -9,6 +9,8 @@ cityStruct * cityArray;
 string ** arrayMap = nullptr;
 
 void createCityMap(string cityFile, int row, int col){
+	//clean the file
+	cleanFile(cityFile);
     //read city file
     ifstream cityData(cityFile); 
     string line;
@@ -50,7 +52,7 @@ void createCityMap(string cityFile, int row, int col){
                 arrayMap[i][j] = oss.str();
             }
         }
-        //
+        //Get the city ID and put into the map
         for (int k = 0; k < totalLength; k++)
 		{
 			ostringstream oss;
@@ -66,26 +68,34 @@ void createCityMap(string cityFile, int row, int col){
 //Display map in a simple UI
 void displayCityMap(int row,int col)
 {
+	//This draws the first row
 	cout << "  #";
 	for (int i=0;i<col;i++)
 	{
 		cout << " " << "#";
 	}
 	cout << " #" << endl;
+
+	//This draws the column
 	for (int i=0;i<row;i++)
 	{	
+		//Column number
 		cout << (row - i - 1) << " #" ;	
+		//The city numbers inside the grid
 		for (int j=0;j<col;j++)
 		{	
 			cout << " " << arrayMap[i][j];
 		}
 		cout << " #" << endl;
 	}
+
+	//This draws the bottom row
 	cout << "  #";
 	for (int i=0;i<col;i++)
 	{
 		cout << " " << "#";
 	}
+	//Row number
 	cout << " #" << endl << "   ";
 	for (int i=0;i<col;i++)
 	{

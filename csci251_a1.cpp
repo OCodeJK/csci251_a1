@@ -165,15 +165,25 @@ int main() {
                     cin.get();
                     break;
                 } else {
-                    displayCloudMap(xMax,yMax, cleaned_choice);
+                    displayCloudMap(xMax,yMax, 3);
                     cout << endl;
 					cout << "Press <enter> to go back to main menu..." << endl;
 					cin.get();
 					break;
                 }
             case 4:
-                cout << "You have selected option 4" << endl;
-                break;
+                if (cloudFile.empty()){
+                    cout << "You have not entered a valid config file with a city text file" << endl;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.get();
+                    break;
+                } else {
+                    displayCloudMap(xMax,yMax, 4);
+                    cout << endl;
+					cout << "Press <enter> to go back to main menu..." << endl;
+					cin.get();
+					break;
+                }
             case 5:
                 cout << "You have selected option 5" << endl;
                 break;

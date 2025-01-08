@@ -153,7 +153,7 @@ int main() {
                     displayCityMap(xMax,yMax);
                     cout << endl;
 					cout << "Press <enter> to go back to main menu..." << endl;
-					cin.ignore(numeric_limits<int>::max(),'\n');
+					cin.get();
 					break;
                 }
                 

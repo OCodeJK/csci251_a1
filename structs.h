@@ -1,7 +1,13 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
+#include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
 
 struct cityStruct {
     int x, y;

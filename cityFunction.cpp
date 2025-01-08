@@ -5,8 +5,10 @@
 
 using namespace std;
 
+// initialize the array structure and map
 cityStruct * cityArray;
 string ** arrayMap = nullptr;
+
 
 void createCityMap(string cityFile, int row, int col){
 	//clean the file
@@ -19,22 +21,26 @@ void createCityMap(string cityFile, int row, int col){
     if(cityData.is_open()) {
 
         while(getline(cityData, line)){
-            totalLength++;
+
+			if(!line.empty()) {
+				totalLength++;
+			}
+			
         }
 
-        ifstream cityData(cityFile.c_str());
+        ifstream cityData(cityFile);
         //create dynamic array to store the actual city coordinates
         cityArray = new cityStruct[totalLength];
         int lineNo = 0;
         // Go through each line, tokenize each of them and store in a respective variable
         while(getline(cityData, line)){
-            vector<string> cityDataVector = tokenizeString(line, "-"); //Split according to - so eg. [1, 1], 3, Big_City
-			vector<string> cityCoordsVector = tokenizeString(cityDataVector[0], ","); //Split again for the coords eg. ([1), (1])
-            cityCoordsVector[0].erase(cityCoordsVector[0].begin()); //Get the rid of the [
-            cityArray[lineNo].x = stoi(cityCoordsVector[0]);
-			cityArray[lineNo].y = stoi(cityCoordsVector[1]);
-			cityArray[lineNo].cityId = stoi(cityDataVector[1]);
-			cityArray[lineNo].name = cityDataVector[2];
+            vector<string> cityDataSplit = tokenizeString(line, "-"); //Split according to - so eg. [1, 1], 3, Big_City
+			vector<string> cityCoordsSplit = tokenizeString(cityDataSplit[0], ","); //Split again for the coords eg. ([1), (1])
+            cityCoordsSplit[0].erase(cityCoordsSplit[0].begin()); //Get the rid of the [
+            cityArray[lineNo].x = stoi(cityCoordsSplit[0]); //Stores the x coord in cityArray[n].x
+			cityArray[lineNo].y = stoi(cityCoordsSplit[1]); //Stores the y coord in cityArray[n].y
+			cityArray[lineNo].cityId = stoi(cityDataSplit[1]); //Store the city id in cityArray[n].cityId
+			cityArray[lineNo].name = cityDataSplit[2]; //Store the city name in cityArray[n].name
 			lineNo++;
         }
         cityData.close();
@@ -61,7 +67,7 @@ void createCityMap(string cityFile, int row, int col){
 		}
 
     } else {
-        cerr << "Unable to open file" << endl;
+        cerr << "Error: Unable to open this file: " << cityFile << endl;
     }
 }
 

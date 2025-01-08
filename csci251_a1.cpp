@@ -8,7 +8,6 @@
 using namespace std;
 
 
-void createCityMap(string, int, int);
 
 
 //for storing the different files in the config.txt
@@ -81,7 +80,7 @@ int main() {
                 string line;
                 int lineCount = 0;
                 cleanFile(config);
-                ifstream configData(config.c_str());
+                ifstream configData(config);
                 if (configData.is_open()) {
 
                     while(getline(configData, line)) {
@@ -120,6 +119,8 @@ int main() {
                     xMax = stoi(xValues[1]) + 1;
                     yMax = stoi(yValues[1]) + 1;
                     createCityMap(cityFile,xMax,yMax);
+                    createCloudMap(cloudFile,xMax,yMax);
+                    // createPressureMap(pressureFile, xMax, yMax);
                     cout << endl;
                     cout << "Getting X axis " << gridXRange << "...completed!" << endl;
                     cout << "Getting Y axis " << gridYRange << "...completed!" << endl;
@@ -158,8 +159,18 @@ int main() {
                 }
                 
             case 3:
-                cout << "You have selected option 3" << endl;
-                break;
+                if (cloudFile.empty()){
+                    cout << "You have not entered a valid config file with a city text file" << endl;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.get();
+                    break;
+                } else {
+                    displayCloudMap(xMax,yMax, cleaned_choice);
+                    cout << endl;
+					cout << "Press <enter> to go back to main menu..." << endl;
+					cin.get();
+					break;
+                }
             case 4:
                 cout << "You have selected option 4" << endl;
                 break;
@@ -181,6 +192,7 @@ int main() {
 
     //deallocate memory
     deleteCityMemory(xMax,yMax);
+    deleteCloudMemory(xMax, yMax);
     cout << "Exiting..." << endl;
     
 

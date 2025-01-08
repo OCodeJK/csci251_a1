@@ -17,6 +17,11 @@ void createCityMap(string cityFile, int row, int col);
 void displayCityMap(int row, int col);
 void deleteCityMemory(int row, int col);
 
+//Cloud functions
+void createCloudMap(string cityFile, int row, int col);
+void displayCloudMap(int row,int col,int choiceNo);
+void deleteCloudMemory(int row, int col);
+
 // Function to trim leading and trailing whitespace from a string
 inline string trim(const string& str) {
     auto start = str.find_first_not_of(" \t\r\n");
@@ -58,6 +63,81 @@ inline void cleanFile(const string& filename) {
     } else {
         cerr << "Failed to open the" << filename << "file for writing." << endl;
     }
+}
+
+inline int sortIndex(int sortNo)
+{
+	if(sortNo < 10)
+	{
+		return 0;
+	}
+	else if(sortNo < 20)
+	{
+		return 1;
+	}
+	else if(sortNo < 30)
+	{
+		return 2;
+	}
+	else if(sortNo < 40)
+	{
+		return 3;
+	}
+	else if(sortNo < 50)
+	{
+		return 4;
+	}
+	else if(sortNo < 60)
+	{
+		return 5;
+	}
+	else if(sortNo < 70)
+	{
+		return 6;
+	}
+	else if(sortNo < 80)
+	{
+		return 7;
+	}
+	else if(sortNo < 90)
+	{
+		return 8;
+	}
+	else if(sortNo < 100)
+	{
+		return 9;
+	}
+	else if(sortNo < 0)
+	{
+		cout << "Invalid number found";
+		return(0);
+	}
+	else
+	{
+		cout << "Invalid number found";
+		return(0);
+	}
+}
+
+inline string sortLMH(int sortNo)
+{
+	if(sortNo < 35)
+	{
+		return "L";
+	}
+	else if(sortNo< 65)
+	{
+		return "M";
+	}
+	else if(sortNo < 100)
+	{
+		return "H";
+	}
+	else
+	{
+		cout << "Invalid number found";
+		return(0);
+	}
 }
 
 #endif

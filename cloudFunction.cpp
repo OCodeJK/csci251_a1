@@ -89,7 +89,11 @@ void displayCloudMap(int row, int col, int choice)
 			// display the map in LMH form
 			if (choice == 4)
 			{
-				cout << " " << sortLMH(stoi(cloudMap[i][j]));
+				if (cloudMap[i][j] == ""){
+					cout << " " << "?";
+				} else {
+					cout << " " << sortLMH(stoi(cloudMap[i][j]));
+				}	
 			}	
 		}
 		cout << " #" << endl;

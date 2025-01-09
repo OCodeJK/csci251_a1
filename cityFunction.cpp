@@ -50,6 +50,7 @@ void createCityMap(string cityFile, int row, int col){
         for (int i = 0; i < col; i++){
             cityMap[i] = new string [col];
         }
+
         for (int i = 0; i < row; i++){
             for (int j = 0; j < col; j++){
                 ostringstream oss;
@@ -58,6 +59,7 @@ void createCityMap(string cityFile, int row, int col){
                 cityMap[i][j] = oss.str();
             }
         }
+		
         //Get the city ID and put into the map
         for (int k = 0; k < totalLength; k++)
 		{

@@ -44,6 +44,8 @@ int main() {
 
         cout << "Please enter your choice : ";
         getline(cin, choice);
+        cout << endl;
+
 
         // Check if the input is not empty and is a single character
         if (!choice.empty() && choice.length() == 1 && isdigit(choice[0])){
@@ -89,7 +91,7 @@ int main() {
                         if(line.empty() || line.substr(0,2) == "//"){
                             continue;
                         } else if(line.find(".txt") != string::npos || line.find("=") != string::npos) {
-                            // cout << line << endl;
+                            
                             //Store lines in specific variables
                             if (lineCount == 0) {
                                 gridXRange = line;
@@ -118,6 +120,7 @@ int main() {
                     //also add + 1 because 0 is included
                     xMax = stoi(xValues[1]) + 1;
                     yMax = stoi(yValues[1]) + 1;
+                    //called function to generate map respectively
                     createCityMap(cityFile,xMax,yMax);
                     createCloudMap(cloudFile,xMax,yMax);
                     // createPressureMap(pressureFile, xMax, yMax);
@@ -160,7 +163,7 @@ int main() {
                 
             case 3:
                 if (cloudFile.empty()){
-                    cout << "You have not entered a valid config file with a city text file" << endl;
+                    cout << "You have not entered a valid config file with a cloud text file" << endl;
                     cout << "Press <enter> to go back to main menu." << endl;
                     cin.get();
                     break;
@@ -173,7 +176,7 @@ int main() {
                 }
             case 4:
                 if (cloudFile.empty()){
-                    cout << "You have not entered a valid config file with a city text file" << endl;
+                    cout << "You have not entered a valid config file with a cloud text file" << endl;
                     cout << "Press <enter> to go back to main menu." << endl;
                     cin.get();
                     break;

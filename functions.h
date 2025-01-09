@@ -38,13 +38,10 @@ inline void cleanFile(const string& filename) {
     if (inputFile.is_open()) {
         // Read the file line by line
         while (getline(inputFile, line)) {
-            // Trim the line
+            // Trim the line and add non-empty lines
             line = trim(line);
+			lines.push_back(line);
 
-            // Add non-empty lines to the list
-            if (!line.empty()) {
-                lines.push_back(line);
-            }
         }
         inputFile.close();
     } else {
@@ -52,17 +49,59 @@ inline void cleanFile(const string& filename) {
         return;
     }
 
+	//Remove trailing empty lines from the vector
+	while (!lines.empty() && lines.back().empty()) {
+		lines.pop_back();
+	}
+
     // Rewrite the file with cleaned lines
     ofstream outputFile(filename, ios::trunc);
     if (outputFile.is_open()) {
-        for (const auto& cleanedLine : lines) {
-            outputFile << cleanedLine << endl;
-        }
+        for (size_t i=0; i < lines.size(); ++i) {
+			//Avoid adding an extra newline at the end of the file
+			outputFile << lines[i];
+			if (i < lines.size() - 1){
+				outputFile << endl;
+			}
+		}
         outputFile.close();
-        cout << "File " << filename << " cleaned successfully." << endl;
     } else {
         cerr << "Failed to open the" << filename << "file for writing." << endl;
     }
+}
+
+//Read the last line of a .txt file assuming there is no new line spaces at the end
+inline string readLastLine(const string& filename) {
+    ifstream file(filename, ios::in);
+    if (!file.is_open()) {
+        throw runtime_error("Could not open file");
+    }
+
+    file.seekg(0, ios::end); // Move to the end of the file
+
+    auto fileSize = file.tellg();
+    if (fileSize == 0) { // Check if the file is empty
+        return ""; // Return empty string for empty file
+    }
+
+    // Move backward to find the start of the last line
+    char ch;
+    long long pos = static_cast<long long>(fileSize) - 1; // Explicit cast to signed type
+    while (pos >= 0) {
+        file.seekg(pos);
+        file.get(ch);
+
+        if (ch == '\n' && pos != static_cast<long long>(fileSize) - 1) {
+            break; // Found the beginning of the last line
+        }
+        pos--;
+    }
+
+    // Read the last line
+    string lastLine;
+    getline(file, lastLine);
+
+    return lastLine;
 }
 
 inline int sortIndex(int sortNo)

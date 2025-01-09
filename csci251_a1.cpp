@@ -62,6 +62,8 @@ int main() {
             error_message = "Invalid input. Please enter a single digit only.";
             continue;
         }
+
+        
         
         switch(cleaned_choice){
             //Option 1: Read config file by user
@@ -109,6 +111,16 @@ int main() {
                         }
                     }
                     configData.close();
+
+                    //read the maximum City [x,y] and compare it to the given gridX and gridY
+                    string lastLineCityFile = readLastLine(cityFile); //last line of citylocation.txt
+                    vector<string> lastLineCityFileSplit = tokenizeString(lastLineCityFile, "-"); //[n,n]   cityid    cityname
+                    vector<string> lastValueSplit = tokenizeString(lastLineCityFileSplit[0], ",");
+                    lastValueSplit[0].erase(lastValueSplit[0].begin()); //Remove [ from [n
+                    lastValueSplit[1].pop_back(); //Remove ] from n]
+                    lastValueSplit[1].erase(lastValueSplit[1].begin());
+                    lastLineCityFileSplit.clear();
+
                     //Split the strings up according to the delimiter
                     vector<string> tokenStringVector = tokenizeString(gridXRange, "=");
                     vector<string> xValues = tokenizeString(tokenStringVector[1], "-"); //so the n1 and n2 is stored here
@@ -116,10 +128,31 @@ int main() {
                     tokenStringVector = tokenizeString(gridYRange, "=");
                     vector<string> yValues = tokenizeString(tokenStringVector[1], "-");
                     tokenStringVector.clear();
+
+                    //Compare City[X,Y] to the Grid X and Grid Y
+                    if (lastValueSplit[0] == xValues[1] && lastValueSplit[1] == yValues[1]) {
+                        error_message = "Grid X and Y is out of range for your cities! Re-adjust your ranges in: " + config;
+                        
+                        break;
+                        
+                    } else if (lastValueSplit[0] == xValues[1]) {
+                        error_message = "Grid X: " + xValues[1] + " is out of range for your cities! Re-adjust your X range in: " + config;
+                        
+                       
+                        break;
+                    } else if (lastValueSplit[1] == yValues[1]) {
+                        error_message = "Grid Y: " + yValues[1] + " is out of range for your cities! Re-adjust your X range in: " + config;
+
+                        break;
+                    }
+
+
                     //assign the individual value to a variable
                     //also add + 1 because 0 is included
-                    xMax = stoi(xValues[1]) + 1;
-                    yMax = stoi(yValues[1]) + 1;
+                    xMax = stoi(xValues[1]) + 1; //7 + 1
+                    yMax = stoi(yValues[1]) + 1; //7 + 1
+
+
                     //called function to generate map respectively
                     createCityMap(cityFile,xMax,yMax);
                     createCloudMap(cloudFile,xMax,yMax);

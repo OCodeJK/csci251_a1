@@ -1,8 +1,8 @@
 .vscode/settings.json
 .vscode/tasks.json
-csci251_a1.app
 input.txt
 config.txt
 citylocation.txt
 indexValue.cpp
 cloudcover.txt
+csci251_a1.app

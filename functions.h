@@ -14,12 +14,12 @@ vector<string> tokenizeString(string input, string delimiter);
 
 //City functions
 void createCityMap(string cityFile, int row, int col);
-void displayCityMap(int row, int col);
+void displayCityMap(int row, int col, int rowstart, int colstart);
 void deleteCityMemory(int row, int col);
 
 //Cloud functions
 void createCloudMap(string cityFile, int row, int col);
-void displayCloudMap(int row,int col,int choiceNo);
+void displayCloudMap(int row,int col, int rowstart, int colstart, int choiceNo);
 void deleteCloudMemory(int row, int col);
 
 // Function to trim leading and trailing whitespace from a string

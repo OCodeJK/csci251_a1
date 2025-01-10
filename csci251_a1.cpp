@@ -19,6 +19,7 @@ int main() {
     int cleaned_choice = 0;
     string error_message;
     int xMax, yMax;
+    int xMin, yMin;
 
     do {
         cout << endl;
@@ -122,12 +123,12 @@ int main() {
                     lastLineCityFileSplit.clear();
 
                     //Split the strings up according to the delimiter
-                    vector<string> tokenStringVector = tokenizeString(gridXRange, "=");
-                    vector<string> xValues = tokenizeString(tokenStringVector[1], "-"); //so the n1 and n2 is stored here
-                    tokenStringVector.clear();
-                    tokenStringVector = tokenizeString(gridYRange, "=");
-                    vector<string> yValues = tokenizeString(tokenStringVector[1], "-");
-                    tokenStringVector.clear();
+                    vector<string> gridXSplit = tokenizeString(gridXRange, "=");
+                    vector<string> xValues = tokenizeString(gridXSplit[1], "-"); //so the n1 and n2 for X is stored here
+                    gridXSplit.clear();
+                    vector<string> gridYSplit = tokenizeString(gridYRange, "=");
+                    vector<string> yValues = tokenizeString(gridYSplit[1], "-");
+                    gridYSplit.clear();
 
                     //Compare City[X,Y] to the Grid X and Grid Y
                     if (lastValueSplit[0] == xValues[1] && lastValueSplit[1] == yValues[1]) {
@@ -149,8 +150,10 @@ int main() {
 
                     //assign the individual value to a variable
                     //also add + 1 because 0 is included
-                    xMax = stoi(xValues[1]) + 1; //7 + 1
-                    yMax = stoi(yValues[1]) + 1; //7 + 1
+                    xMax = stoi(xValues[1]) + 1; //7 + 1 (End)
+                    yMax = stoi(yValues[1]) + 1; //7 + 1 (End)
+                    xMin = stoi(xValues[0]); //Start
+                    yMin = stoi(yValues[0]); //Start
 
 
                     //called function to generate map respectively
@@ -187,7 +190,7 @@ int main() {
                     cin.get();
                     break;
                 } else {
-                    displayCityMap(xMax,yMax);
+                    displayCityMap(xMax, yMax, xMin, yMin);
                     cout << endl;
 					cout << "Press <enter> to go back to main menu..." << endl;
 					cin.get();
@@ -201,7 +204,7 @@ int main() {
                     cin.get();
                     break;
                 } else {
-                    displayCloudMap(xMax,yMax, 3);
+                    displayCloudMap(xMax,yMax, xMin, yMin, 3);
                     cout << endl;
 					cout << "Press <enter> to go back to main menu..." << endl;
 					cin.get();
@@ -214,7 +217,7 @@ int main() {
                     cin.get();
                     break;
                 } else {
-                    displayCloudMap(xMax,yMax, 4);
+                    displayCloudMap(xMax,yMax, xMin, yMin, 4);
                     cout << endl;
 					cout << "Press <enter> to go back to main menu..." << endl;
 					cin.get();

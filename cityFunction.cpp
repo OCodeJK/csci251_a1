@@ -74,7 +74,7 @@ void createCityMap(string cityFile, int row, int col){
 }
 
 //Display map in a simple UI
-void displayCityMap(int row,int col)
+void displayCityMap(int row, int col, int rowstart, int colstart)
 {
 	//This draws the first row
 	cout << "  #";
@@ -85,10 +85,11 @@ void displayCityMap(int row,int col)
 	cout << " #" << endl;
 
 	//This draws the column
-	for (int i=0;i<row;i++)
+	for (int i=colstart; i<row; i++)
 	{	
-		//Column number
-		cout << (row - i - 1) << " #" ;	
+		//Column number tried to implement weird starting numbers
+		cout << (row - i - 1 + colstart) << " #" ;	
+
 		//The city numbers inside the grid
 		for (int j=0;j<col;j++)
 		{	
@@ -103,9 +104,9 @@ void displayCityMap(int row,int col)
 	{
 		cout << " " << "#";
 	}
-	//Row number
+	//Row number tried to implement weird starting numbers
 	cout << " #" << endl << "   ";
-	for (int i=0;i<col;i++)
+	for (int i=rowstart; i<col+rowstart; i++)
 	{
 		cout << " " << i;
 	}

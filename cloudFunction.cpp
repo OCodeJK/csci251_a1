@@ -48,11 +48,16 @@ void createCloudMap(string cloudFile,int row,int col)
 			cloudArray[lineNumber].x = stoi(cloudCoordsVector[0]);
 			cloudArray[lineNumber].y = stoi(cloudCoordsVector[1]);
 			cloudArray[lineNumber].cloudLvl = stoi(cloudDataVector[1]);
+			lineNumber++;
+			
+		}
+
+		for (int k=0; k < totalLength; k++){
 			// insert the cloud level into the map for the specific coordinate
 			ostringstream oss;
-			oss << cloudArray[lineNumber].cloudLvl;
-			cloudMap[col-1-cloudArray[lineNumber].y][cloudArray[lineNumber].x] = oss.str();
-			lineNumber++;
+			oss << cloudArray[k].cloudLvl;
+			cloudMap[col-1-cloudArray[k].y][cloudArray[k].x] = oss.str();
+			
 		}
         
 	}
@@ -63,7 +68,7 @@ void createCloudMap(string cloudFile,int row,int col)
 }
 
 // function to display the map of cloud level depending on how the user wants it in.
-void displayCloudMap(int row, int col, int choice)
+void displayCloudMap(int row, int col, int rowstart, int colstart, int choice)
 {
 	cout << "  #";
 	for (int i=0;i<col;i++)
@@ -71,9 +76,10 @@ void displayCloudMap(int row, int col, int choice)
 		cout << " " << "#";
 	}
 	cout << " #" << endl;
-	for (int i=0;i<row;i++)
+	for (int i=colstart; i<row; i++)
 	{	
-		cout << (row - i - 1) << " #" ;	
+		//Column number
+		cout << (row - i - 1 + colstart) << " #" ;	
 		for (int j=0;j<col;j++)
 		{	
 			// display the map in index form
@@ -103,8 +109,9 @@ void displayCloudMap(int row, int col, int choice)
 	{
 		cout << " " << "#";
 	}
+	//Row number
 	cout << " #" << endl << "   ";
-	for (int i=0;i<col;i++)
+	for (int i=rowstart; i<col+rowstart; i++)
 	{
 		cout << " " << i;
 	}

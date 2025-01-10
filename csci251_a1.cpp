@@ -142,7 +142,7 @@ int main() {
                        
                         break;
                     } else if (lastValueSplit[1] == yValues[1]) {
-                        error_message = "Grid Y: " + yValues[1] + " is out of range for your cities! Re-adjust your X range in: " + config;
+                        error_message = "Grid Y: " + yValues[1] + " is out of range for your cities! Re-adjust your Y range in: " + config;
 
                         break;
                     }

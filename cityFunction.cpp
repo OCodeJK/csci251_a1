@@ -66,6 +66,7 @@ void createCityMap(string cityFile, int row, int col){
 			ostringstream oss;
 			oss << cityArray[k].cityId;
 			cityMap[col-1-cityArray[k].y][cityArray[k].x] = oss.str();
+			
 		}
 
     } else {

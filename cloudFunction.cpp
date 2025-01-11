@@ -40,16 +40,16 @@ void createCloudMap(string cloudFile, int row, int col)
         cloudArray = new cloudStruct[totalLength];
 
         while (getline(cloudData, line)) {
-            vector<string> cloudDataVector = tokenizeString(line, "-"); //Split [n,n]   cloudIndex
-            vector<string> cloudCoordsVector = tokenizeString(cloudDataVector[0], ","); //Split [n     n]
+            vector<string> cloudDataSplit = tokenizeString(line, "-"); //Split [n,n]   cloudIndex
+            vector<string> cloudCoordsSplit = tokenizeString(cloudDataSplit[0], ","); //Split [n     n]
             
             // Remove brackets and spaces from coordinates
-            cloudCoordsVector[0].erase(cloudCoordsVector[0].begin());  // Remove '['
-            cloudCoordsVector[1].erase(cloudCoordsVector[1].end()-1);  // Remove ']'
+            cloudCoordsSplit[0].erase(cloudCoordsSplit[0].begin());  // Remove '['
+            cloudCoordsSplit[1].erase(cloudCoordsSplit[1].end()-1);  // Remove ']'
 
-            cloudArray[lineNumber].x = stoi(cloudCoordsVector[0]); //parse info into array
-            cloudArray[lineNumber].y = stoi(cloudCoordsVector[1]);
-            cloudArray[lineNumber].cloudLvl = stoi(cloudDataVector[1]);
+            cloudArray[lineNumber].x = stoi(cloudCoordsSplit[0]); //parse info into array
+            cloudArray[lineNumber].y = stoi(cloudCoordsSplit[1]);
+            cloudArray[lineNumber].cloudLvl = stoi(cloudDataSplit[1]);
             lineNumber++;
         }
 

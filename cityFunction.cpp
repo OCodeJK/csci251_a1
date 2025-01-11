@@ -41,8 +41,7 @@ void createCityMap(string cityFile, int row, int col) {
         }
         cityData.close();
 
-		cout << "Initializing city map with dimensions: " << row << "x" << col << endl;
-
+        //Generate empty map
         cityMap = new string*[row];
         for (int i = 0; i < row; i++) {
             cityMap[i] = new string[col];
@@ -54,6 +53,7 @@ void createCityMap(string cityFile, int row, int col) {
             }
         }
 
+        //Put the city Id into the map
         for (int k = 0; k < totalLength; k++) {
             ostringstream oss;
 			oss << cityArray[k].cityId;

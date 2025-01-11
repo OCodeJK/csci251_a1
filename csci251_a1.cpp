@@ -157,9 +157,9 @@ int main() {
 
 
                     //called function to generate map respectively
-                    createCityMap(cityFile,xMax,yMax);
-                    createCloudMap(cloudFile,xMax,yMax);
-                    // createPressureMap(pressureFile, xMax, yMax);
+                    createCityMap(cityFile, xMax, yMax);
+                    createCloudMap(cloudFile, xMax, yMax);
+                    createPressureMap(pressureFile, xMax, yMax);
                     cout << endl;
                     cout << "Getting X axis " << gridXRange << "...completed!" << endl;
                     cout << "Getting Y axis " << gridYRange << "...completed!" << endl;
@@ -224,11 +224,31 @@ int main() {
 					break;
                 }
             case 5:
-                cout << "You have selected option 5" << endl;
-                break;
+                if (pressureFile.empty()){
+                    cout << "You have not entered a valid config file with a cloud text file" << endl;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.get();
+                    break;
+                } else {
+                    displayPressureMap(xMax,yMax, xMin, yMin, 5);
+                    cout << endl;
+					cout << "Press <enter> to go back to main menu..." << endl;
+					cin.get();
+					break;
+                }
             case 6:
-                cout << "You have selected option 6" << endl;
-                break;
+                if (pressureFile.empty()){
+                    cout << "You have not entered a valid config file with a cloud text file" << endl;
+                    cout << "Press <enter> to go back to main menu." << endl;
+                    cin.get();
+                    break;
+                } else {
+                    displayPressureMap(xMax,yMax, xMin, yMin, 6);
+                    cout << endl;
+					cout << "Press <enter> to go back to main menu..." << endl;
+					cin.get();
+					break;
+                }
             case 7:
                 cout << "You have selected option 7" << endl;
                 break;
@@ -242,6 +262,7 @@ int main() {
     //deallocate memory
     deleteCityMemory(xMax,yMax);
     deleteCloudMemory(xMax, yMax);
+    deletePressureMemory(xMax, yMax);
     cout << "Exiting..." << endl;
     
 

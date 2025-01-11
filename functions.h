@@ -22,6 +22,11 @@ void createCloudMap(string cloudFile, int row, int col);
 void displayCloudMap(int row, int col, int rowstart, int colstart, int choiceNo);
 void deleteCloudMemory(int row, int col);
 
+//Pressure functions
+void createPressureMap(string pressureFile, int row, int col);
+void displayPressureMap(int row, int col, int rowstart, int colstart, int choice);
+void deletePressureMemory(int row,int col);
+
 // Function to trim leading and trailing whitespace from a string
 inline string trim(const string& str) {
     auto start = str.find_first_not_of(" \t\r\n");

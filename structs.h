@@ -47,5 +47,23 @@ inline string cloudStruct::toString()
 	return (oss.str());
 }
 
+struct pressureStruct 
+{
+	int x, y;
+	int pressureLvl;
+	string toString();
+};
+
+inline string pressureStruct::toString()
+{
+	ostringstream oss;
+
+	oss << "X Coords               : " << x << endl;
+	oss << "Y Coords               : " << y << endl;
+	oss << "Pressure Level            : " << pressureLvl << endl;
+
+	return (oss.str());
+}
+
 
 #endif

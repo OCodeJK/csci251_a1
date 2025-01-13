@@ -17,17 +17,7 @@ struct cityStruct {
     string toString();
 };
 
-inline string cityStruct::toString()
-{
-	ostringstream oss;
 
-	oss << "X Coords               : " << x << endl;
-	oss << "Y Coords               : " << y << endl;
-	oss << "City ID           : " << cityId << endl;
-	oss << "City Name    : " << name << endl;
-
-	return (oss.str());
-}
 
 struct cloudStruct 
 {
@@ -36,16 +26,7 @@ struct cloudStruct
 	string toString();
 };
 
-inline string cloudStruct::toString()
-{
-	ostringstream oss;
 
-	oss << "X Coords               : " << x << endl;
-	oss << "Y Coords               : " << y << endl;
-	oss << "Cloud Level            : " << cloudLvl << endl;
-
-	return (oss.str());
-}
 
 struct pressureStruct 
 {
@@ -54,16 +35,7 @@ struct pressureStruct
 	string toString();
 };
 
-inline string pressureStruct::toString()
-{
-	ostringstream oss;
 
-	oss << "X Coords               : " << x << endl;
-	oss << "Y Coords               : " << y << endl;
-	oss << "Pressure Level            : " << pressureLvl << endl;
-
-	return (oss.str());
-}
 
 
 #endif

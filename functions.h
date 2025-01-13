@@ -1,13 +1,18 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
+#include "structs.h"
+#include <fstream>
+#include <iomanip>
 
 using namespace std;
 
-#include <string>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <iostream>
+
+extern cityStruct * cityArray;
+extern string ** cityMap;
+extern cloudStruct * cloudArray;
+extern string ** cloudMap;
+extern pressureStruct * pressureArray;
+extern string ** pressureMap;
 
 //tokenizer function for strings
 vector<string> tokenizeString(string input, string delimiter);
@@ -26,6 +31,9 @@ void deleteCloudMemory(int row, int col);
 void createPressureMap(string pressureFile, int row, int col);
 void displayPressureMap(int row, int col, int rowstart, int colstart, int choice);
 void deletePressureMemory(int row,int col);
+
+//Weather
+void weatherSummary(int arrayLength, int totalCity, int totalLength);
 
 // Function to trim leading and trailing whitespace from a string
 inline string trim(const string& str) {
@@ -181,6 +189,73 @@ inline string sortLMH(int sortNo)
 	{
 		cout << "Invalid number found";
 		return(0);
+	}
+}
+
+inline void sortRainPos(int cloudNo,int pressureNo)
+{
+	if(sortLMH(cloudNo) == "H")
+	{
+		if(sortLMH(pressureNo) == "H")
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 30.00" << endl;
+			cout << "~~~" << endl << "~~~~" << endl;
+		}
+		else if(sortLMH(pressureNo) == "M")
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 60.00" << endl;
+			cout << "~~~~" << endl << "~~~~~" << endl << "   \\\\";
+		}
+		else
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 90.00" << endl;
+			cout << "~~~~" << endl << "~~~~~" << endl << "\\\\\\\\\\";
+		}
+	}
+	else if(sortLMH(cloudNo) == "M")
+	{
+		if(sortLMH(pressureNo) == "H")
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 20.00" << endl;
+			cout << "~~" << endl << "~~~" << endl;
+		}
+		else if(sortLMH(pressureNo) == "M")
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 50.00" << endl;
+			cout << "~~~~" << endl << "~~~~~" << endl << "    \\";
+		}
+		else
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 80.00" << endl;
+			cout << "~~~~" << endl << "~~~~~" << endl << " \\\\\\\\";
+		}
+	}
+	else
+	{
+		if(sortLMH(pressureNo) == "H")
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 10.00" << endl;
+			cout << "~" << endl << "~~" << endl;
+		}
+		else if(sortLMH(pressureNo) == "M")
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 40.00" << endl;
+			cout << "~~~~" << endl << "~~~~~" << endl;	
+		}
+		else
+		{
+			cout << endl;
+			cout << "Probability of Rain (%) : 70.00" << endl;
+			cout << "~~~~" << endl << "~~~~~" << endl << "  \\\\\\";
+		}
 	}
 }
 

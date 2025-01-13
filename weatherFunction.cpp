@@ -23,7 +23,7 @@ void weatherSummary(int arrayLength, int totalCity, int totalLength){
 			// cross check the x and y coordinate to the already generated structure
 			if(cityArray[i].x == cloudArray[j].x & cityArray[i].y == cloudArray[j].y)
 			{
-				// City ID always starts from 1
+				// City ID always starts from 1 so (-1)
 				avgCloud[cityArray[i].cityId-1] += cloudArray[j].cloudLvl;
 				avgPressure[cityArray[i].cityId-1] += pressureArray[j].pressureLvl;
 				cityCounter[cityArray[i].cityId-1] += 1;

@@ -1,13 +1,11 @@
 #include "functions.h"
+#include "structs.h"
 #include <iostream>
 #include <string>
 #include <iomanip>
 #include <fstream>
-#include <limits>
 
 using namespace std;
-
-
 
 
 //for storing the different files in the config.txt
@@ -124,11 +122,9 @@ int main() {
 
                     //Split the strings up according to the delimiter
                     vector<string> gridXSplit = tokenizeString(gridXRange, "=");
-                    vector<string> xValues = tokenizeString(gridXSplit[1], "-"); //so the n1 and n2 for X is stored here
-                    gridXSplit.clear();
-                    vector<string> gridYSplit = tokenizeString(gridYRange, "=");
+                    vector<string> xValues = tokenizeString(gridXSplit[1], "-"); //The n1 and n2 for X is stored here
+                    vector<string> gridYSplit = tokenizeString(gridYRange, "="); //The n1 and n2 for Y is stored here
                     vector<string> yValues = tokenizeString(gridYSplit[1], "-");
-                    gridYSplit.clear();
 
                     //Compare City[X,Y] to the Grid X and Grid Y
                     if (lastValueSplit[0] == xValues[1] && lastValueSplit[1] == yValues[1]) {
@@ -250,8 +246,24 @@ int main() {
 					break;
                 }
             case 7:
-                cout << "You have selected option 7" << endl;
-                break;
+                int arrayLength = 0;
+                int totalCity = 0;
+                string line;
+                ifstream cityData(cityFile);
+                while (getline(cityData,line))
+                {
+                    vector<string> cityDataVector = tokenizeString(line, "-");
+                    if (stoi(cityDataVector[1]) > totalCity)
+                    {
+                        totalCity = stoi(cityDataVector[1]);
+                    }
+                    arrayLength++;
+                }
+                int lengthOfMap = xMax * yMax;
+                weatherSummary(arrayLength, totalCity, lengthOfMap);
+                cout << "Press <enter> to go back to main menu..." << endl;
+                cin.get();
+				break;
         }
         cout << endl;
 

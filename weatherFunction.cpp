@@ -39,6 +39,7 @@ void weatherSummary(int arrayLength, int totalCity, int totalLength){
 			avgPressure[i] /= cityCounter[i];
 		}
 		cout << endl;
+		cout << fixed << setprecision(2); //Set fixed point to 2 decimal places
 		cout << "City Name : " << cityName[i] << endl;
 		cout << "City ID   : " << i+1 << endl;
 		cout << "Ave. Cloud Cover (ACC)" << "  : " << avgCloud[i] << setprecision(2) << "(" << sortLMH(avgCloud[i]) << ")" << endl;

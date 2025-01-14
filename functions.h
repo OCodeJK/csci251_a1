@@ -3,6 +3,7 @@
 #include "structs.h"
 #include <fstream>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 

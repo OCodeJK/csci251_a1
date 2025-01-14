@@ -16,9 +16,9 @@ void weatherSummary(int arrayLength, int totalCity, int totalLength){
 	vector<string> cityName(totalCity);
 	cout << "Weather Forecast Summary Report" << endl;
 	cout << setfill('-') << setw(32) << "-";
-	for (int i=0;i<arrayLength;i++)
+	for (int i=0; i<arrayLength; i++)
 	{
-		for (int j=0;j<totalLength;j++)
+		for (int j=0; j<totalLength; j++)
 		{
 			// cross check the x and y coordinate to the already generated structure
 			if(cityArray[i].x == cloudArray[j].x & cityArray[i].y == cloudArray[j].y)
@@ -31,7 +31,8 @@ void weatherSummary(int arrayLength, int totalCity, int totalLength){
 			}
 		}	
 	}
-	for (int i=0;i<totalCity;i++)
+
+	for (int i=0; i<totalCity; i++)
 	{
 		// calculate average of cloud and pressure
 		avgCloud[i] = avgCloud[i] / cityCounter[i];

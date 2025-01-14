@@ -164,9 +164,8 @@ int main() {
                     cout << cityFile << "...completed!" << endl;
                     cout << cloudFile << "...completed!" << endl;
                     cout << pressureFile << "...completed!" << endl;
-                    cout << endl << "All records successfully stored. Going back to main menu...<enter>" << endl;
+                    cout << endl << "All records successfully stored. Going back to main menu..." << endl;
                     
-                    cin.get();
 
                     break;
                    

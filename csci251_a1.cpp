@@ -76,7 +76,7 @@ int main() {
                 //Check for empty input
                 if (config.empty()) {
                     cout << "Empty config file input." << endl;
-                    cout << "Press <enter> to go back to main menu." << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
                     cin.get(); //wait for enter
                     break;
                 }
@@ -174,7 +174,7 @@ int main() {
                 else {
                     //check if user inputted something else
                     cerr << "Error: Could not open the file: " << config << endl;;
-                    cout << "Press <enter> to go back to main menu." << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
                     cin.get();
                     break;
                 }
@@ -183,7 +183,7 @@ int main() {
             case 2:
                 if (cityFile.empty()){
                     cout << "You have not entered a valid config file with a city text file" << endl;
-                    cout << "Press <enter> to go back to main menu." << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
                     cin.get();
                     break;
                 } else {
@@ -197,7 +197,7 @@ int main() {
             case 3:
                 if (cloudFile.empty()){
                     cout << "You have not entered a valid config file with a cloud text file" << endl;
-                    cout << "Press <enter> to go back to main menu." << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
                     cin.get();
                     break;
                 } else {
@@ -210,7 +210,7 @@ int main() {
             case 4:
                 if (cloudFile.empty()){
                     cout << "You have not entered a valid config file with a cloud text file" << endl;
-                    cout << "Press <enter> to go back to main menu." << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
                     cin.get();
                     break;
                 } else {
@@ -222,8 +222,8 @@ int main() {
                 }
             case 5:
                 if (pressureFile.empty()){
-                    cout << "You have not entered a valid config file with a cloud text file" << endl;
-                    cout << "Press <enter> to go back to main menu." << endl;
+                    cout << "You have not entered a valid config file with a pressure text file" << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
                     cin.get();
                     break;
                 } else {
@@ -235,8 +235,8 @@ int main() {
                 }
             case 6:
                 if (pressureFile.empty()){
-                    cout << "You have not entered a valid config file with a cloud text file" << endl;
-                    cout << "Press <enter> to go back to main menu." << endl;
+                    cout << "You have not entered a valid config file with a pressure text file" << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
                     cin.get();
                     break;
                 } else {
@@ -247,24 +247,37 @@ int main() {
 					break;
                 }
             case 7:
-                int arrayLength = 0;
-                int totalCity = 0;
-                string line;
-                ifstream cityData(cityFile);
-                while (getline(cityData,line))
-                {
-                    vector<string> cityDataVector = tokenizeString(line, "-");
-                    if (stoi(cityDataVector[1]) > totalCity)
+                if(cloudFile.empty()) {
+                    cout << "Cannot calculate summary: config file with a cloud text file does not exist." << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
+                    cin.get();
+                    break;
+                } else if(pressureFile.empty()) {
+                    cout << "Cannot calculate summary: config file with a pressure text file does not exist." << endl;
+                    cout << "Press <enter> to go back to main menu..." << endl;
+                    cin.get();
+                    break;
+                } else {
+                    int arrayLength = 0;
+                    int totalCity = 0;
+                    string line;
+                    ifstream cityData(cityFile);
+                    while (getline(cityData,line))
                     {
-                        totalCity = stoi(cityDataVector[1]);
+                        vector<string> cityDataVector = tokenizeString(line, "-");
+                        if (stoi(cityDataVector[1]) > totalCity)
+                        {
+                            totalCity = stoi(cityDataVector[1]);
+                        }
+                        arrayLength++;
                     }
-                    arrayLength++;
+                    int lengthOfMap = xMax * yMax;
+                    weatherSummary(arrayLength, totalCity, lengthOfMap);
+                    cout << "Press <enter> to go back to main menu..." << endl;
+                    cin.get();
+                    break;
                 }
-                int lengthOfMap = xMax * yMax;
-                weatherSummary(arrayLength, totalCity, lengthOfMap);
-                cout << "Press <enter> to go back to main menu..." << endl;
-                cin.get();
-				break;
+                
         }
         cout << endl;
 

@@ -41,8 +41,8 @@ void weatherSummary(int arrayLength, int totalCity, int totalLength){
 		cout << endl;
 		cout << "City Name : " << cityName[i] << endl;
 		cout << "City ID   : " << i+1 << endl;
-		cout << "Ave. Cloud Cover (ACC)" << "  : " << avgCloud[i] << setprecision(4) << "(" << sortLMH(avgCloud[i]) << ")" << endl;
-		cout << "Ave. Pressure    (AP) " << "  : " << avgPressure[i] << setprecision(4) << "(" << sortLMH(avgPressure[i]) << ")";
+		cout << "Ave. Cloud Cover (ACC)" << "  : " << avgCloud[i] << setprecision(2) << "(" << sortLMH(avgCloud[i]) << ")" << endl;
+		cout << "Ave. Pressure    (AP) " << "  : " << avgPressure[i] << setprecision(2) << "(" << sortLMH(avgPressure[i]) << ")";
 		sortRainPos(avgCloud[i],avgPressure[i]);
 		cout << endl;
 	}	

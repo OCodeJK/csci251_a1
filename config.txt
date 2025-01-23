@@ -1,5 +1,0 @@
-GridX_IdxRange=0-8
-GridY_IdxRange=0-8
-citylocation.txt
-cloudcover.txt
-pressure.txt
